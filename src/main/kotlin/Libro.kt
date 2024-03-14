@@ -1,20 +1,6 @@
 package org.pebiblioteca
 
-data class Libro(val titulo: String, val autor: String, val anioPublicacion: Int, val tematica: String, var estado: Estado = Estado.DISPONIBLE ){
-
-    val id = generarId()
-
-    companion object{
-
-        fun generarId(): String{
-
-            val num1 = String.format("%03d", (1..300).random())
-            val num2 = String.format("%03d", (1..300).random())
-
-            return "$num1-$num2"
-        }
-
-    }
+data class Libro(val id : String, val titulo: String, val autor: String, val anioPublicacion: Int, val tematica: String, var estado: Estado = Estado.DISPONIBLE ){
 
     init {
         require(titulo.isNotBlank()) {"El título del libro no puede estar vacío."}

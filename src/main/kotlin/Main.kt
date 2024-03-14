@@ -4,9 +4,9 @@ fun main() {
 
     val biblioteca = GestorBiblioteca()
 
-    val libro1 = Libro( "Bruma Roja", "Isabel", 2023, "Fantasía")
-    val libro2 = Libro( "Yumi y el pintor de pesadillas", "Brandon Sanderson", 2022, "Fantasía")
-    val libro3 = Libro( "Harry Poter y la piedra filosofal", "JK", 1990, "Magos")
+    val libro1 = Libro( "8723","Bruma Roja", "Isabel", 2023, "Fantasía")
+    val libro2 = Libro( "8756","Yumi y el pintor de pesadillas", "Brandon Sanderson", 2022, "Fantasía")
+    val libro3 = Libro( "4239","Harry Poter y la piedra filosofal", "JK", 1990, "Magos")
 
     //añadir libros al catálogo
     biblioteca.agregarLibroCatalogo(libro1)
