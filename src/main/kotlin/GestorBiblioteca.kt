@@ -1,9 +1,11 @@
 package org.pebiblioteca
 
-class GestorBiblioteca: UtilidadesBiblioteca(){
+open class GestorBiblioteca: UtilidadesBiblioteca() {
 
-    val catalogo = mutableListOf<Libro>()
-    val registroPrestamos = mutableMapOf<String, String>()
+    companion object{
+        val registroPrestamos = RegistroPrestamos()
+        val catalogo = mutableListOf<Libro>()
+    }
 
     fun agregarLibroCatalogo(libro: Libro){
 
@@ -16,19 +18,24 @@ class GestorBiblioteca: UtilidadesBiblioteca(){
         catalogo.remove(libro)
     }
 
-    fun prestarLibro(libro: Libro){
+    fun prestarLibro(libro: Libro, usuario: Usuario){
         if (libro.estado == Estado.DISPONIBLE){
             libro.estado = Estado.PRESTADO
-            registroPrestamos[libro.id] = "Libro prestado"
+
+            usuario.agregarLibroPrestado(libro)
+            registroPrestamos.registrarPrestamo(libro)
         }else{
             println("El libro: ${libro.titulo} ya esta prestado.")
         }
+
     }
 
-    fun devolverLibro(libro: Libro){
+    fun devolverLibro(libro: Libro, usuario: Usuario){
         if (libro.estado == Estado.PRESTADO){
             libro.estado = Estado.DISPONIBLE
-            registroPrestamos[libro.id] = "Libro devuelto"
+
+            usuario.devolverLibro(libro)
+            registroPrestamos.libroDevuelto(libro)
         }else{
             println("El libro: ${libro.titulo} no ha sido prestado todavía.")
         }

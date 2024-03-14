@@ -1,6 +1,6 @@
 package org.pebiblioteca
 
-data class Libro(val titulo: String, val autor: String, val anioPublicacion: Int, val tematica: String, var estado: Estado = Estado.DISPONIBLE ){
+data class Libro(val titulo: String, private val autor: String,private val anioPublicacion: Int, private val tematica: String, var estado: Estado = Estado.DISPONIBLE ){
 
     lateinit var id : String
 
