@@ -1,11 +1,14 @@
 package org.pebiblioteca
 
-class GestorBiblioteca{
+class GestorBiblioteca: UtilidadesBiblioteca(){
 
     val catalogo = mutableListOf<Libro>()
     val registroPrestamos = mutableMapOf<String, String>()
 
     fun agregarLibroCatalogo(libro: Libro){
+
+        libro.id = generarIdentificadorUnico()
+
         catalogo.add(libro)
     }
 
@@ -37,9 +40,9 @@ class GestorBiblioteca{
 
         if (libro != null) {
             if (libro.estado == Estado.DISPONIBLE){
-                println("El libro: ${libro.titulo} se encuentra disponible en la biblioteca.")
+                println("El libro: '${libro.titulo}' se encuentra disponible en la biblioteca.")
             }else{
-                println("El libro: ${libro.titulo} ha sido prestado y aun no se ha devuelto.")
+                println("El libro: '${libro.titulo}' ha sido prestado y aun no se ha devuelto.")
             }
         }else{
             println("No se encuentra ningún libro con id: $id")
