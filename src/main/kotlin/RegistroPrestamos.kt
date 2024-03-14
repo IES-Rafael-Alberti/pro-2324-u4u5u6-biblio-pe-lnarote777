@@ -1,26 +1,26 @@
 package org.pebiblioteca
 
-open class RegistroPrestamos {
+open class RegistroPrestamos : IGestorPrestamos{
     private val registroPrestamos = mutableListOf<Libro>()
     private val historial = mutableMapOf<String, String>()
 
-    fun registrarPrestamo(libro: Libro){
-        registroPrestamos.add(libro)
-        historial[libro.id] = "Libro prestado"
+    override fun consultarHistorialUsuario(usuario: Usuario){
+        usuario.librosPrestados.forEach { println(it) }
     }
 
-    fun libroDevuelto(libro: Libro){
+    override fun registrardevolucion(libro: Libro) {
         registroPrestamos.add(libro)
         historial[libro.id] = "Libro devuelto"
     }
 
-    fun consultarPrestamosLibro(libro: Libro){
-        val librosPrestados = historial.filter { it.key == libro.id }
-        println(librosPrestados)
+    override fun registrarPrestamo(libro: Libro) {
+        registroPrestamos.add(libro)
+        historial[libro.id] = "Libro prestado"
     }
 
-    fun consultarHistorialUsuario(usuario: Usuario){
-        usuario.librosPrestados.forEach { println(it) }
+    override fun consultarHistorialLibros(libro: Libro) {
+        val librosPrestados = historial.filter { it.key == libro.id }
+        println(librosPrestados)
     }
 
 }

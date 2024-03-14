@@ -1,21 +1,9 @@
 package org.pebiblioteca
 
-open class GestorBiblioteca: UtilidadesBiblioteca() {
+open class GestorBiblioteca(val registroPrestamos: RegistroPrestamos): UtilidadesBiblioteca(), Catalogo {
 
     companion object{
-        val registroPrestamos = RegistroPrestamos()
         val catalogo = mutableListOf<Libro>()
-    }
-
-    fun agregarLibroCatalogo(libro: Libro){
-
-        libro.id = generarIdentificadorUnico()
-
-        catalogo.add(libro)
-    }
-
-    fun eliminarLibroCatalogo(libro: Libro){
-        catalogo.remove(libro)
     }
 
     fun prestarLibro(libro: Libro, usuario: Usuario){
@@ -35,7 +23,7 @@ open class GestorBiblioteca: UtilidadesBiblioteca() {
             libro.estado = Estado.DISPONIBLE
 
             usuario.devolverLibro(libro)
-            registroPrestamos.libroDevuelto(libro)
+            registroPrestamos.registrardevolucion(libro)
         }else{
             println("El libro: ${libro.titulo} no ha sido prestado todavía.")
         }
@@ -85,5 +73,16 @@ open class GestorBiblioteca: UtilidadesBiblioteca() {
             }
         }
     }
+
+    override fun agregarAlCatalogo(elemento: Libro) {
+        elemento.id = generarIdentificadorUnico()
+
+        catalogo.add(elemento)
+    }
+
+    override fun eliminarDelCatalogo(elemento: Libro) {
+        catalogo.remove(elemento)
+    }
+
 
 }
